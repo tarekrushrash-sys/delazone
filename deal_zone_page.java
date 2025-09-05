@@ -6,8 +6,8 @@ import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DealZonePage {
     private final AndroidDriver driver;
@@ -25,7 +25,11 @@ public class DealZonePage {
 
     public List<String> getCategoryNames() {
         List<WebElement> categories = driver.findElements(AppiumBy.id(Locators.CATEGORY_TAB_ID));
-        return categories.stream().map(WebElement::getText).collect(Collectors.toList());
+        List<String> categoryNames = new ArrayList<>();
+        for (WebElement category : categories) {
+            categoryNames.add(category.getText());
+        }
+        return categoryNames;
     }
 
     public boolean hasProductsInCategory(String categoryName) {
