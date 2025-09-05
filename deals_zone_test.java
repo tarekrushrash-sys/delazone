@@ -1,23 +1,9 @@
-package com.hs.tests;
-
-import com.hs.pages.DealZonePage;
-import io.appium.java_client.android.AndroidDriver;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.List;
-
-public class DealsZoneTest {
+public class DealsZoneTest extends BaseTest {
     private static final Logger logger = LoggerFactory.getLogger(DealsZoneTest.class);
-
-    private AndroidDriver driver; 
     private DealZonePage dealZonePage;
 
     @BeforeMethod
-    public void setup() {
+    public void setupPage() {
         dealZonePage = new DealZonePage(driver);
         dealZonePage.openDealZone();
     }
@@ -30,8 +16,8 @@ public class DealsZoneTest {
         for (String category : categories) {
             logger.info("Validating category: {}", category);
             Assert.assertTrue(
-                dealZonePage.hasProductsInCategory(category),
-                "Category [" + category + "] returned no products!"
+                    dealZonePage.hasProductsInCategory(category),
+                    "Category [" + category + "] returned no products!"
             );
         }
     }
